@@ -404,14 +404,15 @@ async function startRace(id) {
 	.catch(err => console.log("Problem with startRace request::", err))
 }
 
-function accelerate(id) {
+async function accelerate(id) {
 	// POST request to `${SERVER}/api/races/${id}/accelerate`
-	
-	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
-		method: 'POST',
-		...defaultFetchOpts(),
-	}).then(res => console.log(res))
-	.catch(error => {
-			console.log(error)
-		});
+	try {
+		const res = await fetch(`${SERVER}/api/races/${id}/accelerate`, {
+			method: 'POST',
+			...defaultFetchOpts(),
+		})
+		return console.log(res)
+	} catch (error) {
+		console.log(error)
+	}
 }
